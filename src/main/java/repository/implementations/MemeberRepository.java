@@ -1,37 +1,42 @@
 package repository.implementations;
 
-import model.User;
-import repository.interfaces.Repository;
+import utils.database.JdbcConnection;
+import model.Member;
+import repository.interfaces.MemberRepositoryInterface;
 
+import java.sql.Connection;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
-public class MemeberRepository implements Repository<User, Integer> {
+public class MemeberRepository extends Repository implements MemberRepositoryInterface {
+
+    public MemeberRepository() {
+        super();
+    }
 
     @Override
-    public Optional<User> get(int id) {
+    public Optional<Member> get(int id) {
         return Optional.empty();
     }
 
     @Override
-    public Collection<User> getAll() {
+    public Collection<Member> getAll() {
         return List.of();
     }
 
     @Override
-    public Optional<Integer> save(User user) {
-
-        return Optional.empty();
-    }
-
-    @Override
-    public void delete(User user) {
+    public void save(Member member) {
 
     }
 
     @Override
-    public void update(User user) {
+    public void update(Member member) {
+
+    }
+
+    @Override
+    public void delete(Member member) {
 
     }
 }
