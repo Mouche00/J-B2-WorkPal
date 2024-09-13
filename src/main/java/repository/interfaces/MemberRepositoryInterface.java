@@ -1,5 +1,5 @@
 package repository.interfaces;
 
-import model.Member;
+import DTO.UserDTO;
 
-public interface MemberRepositoryInterface extends RepositoryInterface<Member> {}
+public interface MemberRepositoryInterface extends RepositoryInterface<UserDTO> {}

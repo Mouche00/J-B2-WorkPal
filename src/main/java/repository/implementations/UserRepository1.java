@@ -1,6 +1,8 @@
 package repository.implementations;
 
 import DTO.UserDTO;
+import model.User;
+import repository.interfaces.RepositoryInterface;
 import repository.interfaces.UserRepositoryInterface;
 import utils.enums.Role;
 
@@ -8,10 +10,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
-public class UserRepository extends Repository implements UserRepositoryInterface {
+public class UserRepository1<T extends User> extends Repository implements RepositoryInterface<T>, UserRepositoryInterface {
     @Override
     public Optional<UserDTO> findByEmail(String email) throws SQLException {
         Optional<UserDTO> user = Optional.empty();
@@ -81,5 +82,30 @@ public class UserRepository extends Repository implements UserRepositoryInterfac
         Statement statement = connection.get().createStatement();
         ResultSet resultSet = statement.executeQuery(sql);
         return resultSet.next();
+    }
+
+    @Override
+    public Optional<T> get(int id) throws SQLException {
+        return Optional.empty();
+    }
+
+    @Override
+    public HashMap<String, T> getAll() throws SQLException {
+        return null;
+    }
+
+    @Override
+    public boolean save(T t) throws SQLException {
+        return false;
+    }
+
+    @Override
+    public boolean update(T t) throws SQLException {
+        return false;
+    }
+
+    @Override
+    public boolean delete(T t) throws SQLException {
+        return false;
     }
 }
