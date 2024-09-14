@@ -25,35 +25,33 @@ CREATE TABLE workspaces (
     description VARCHAR(50) NOT NULL,
     size double precision NOT NULL,
     price double precision NOT NULL,
-    manager_id uuid NOT NULL,
-    constraint fk_manager foreign key(manager_id) references managers(id)
+    managerId uuid NOT NULL,
+    constraint fk_manager foreign key(managerId) references managers(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE reservations (
     id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
-    member_id uuid NOT NULL,
-    workspace_id uuid NOT NULL,
-    start_date DATE NOT NULL,
-    end_date DATE NOT NULL,
-    CONSTRAINT fk_member FOREIGN KEY (member_id) REFERENCES members(id),
-    CONSTRAINT fk_workspace FOREIGN KEY (workspace_id) REFERENCES workspaces(id)
+    memberId uuid NOT NULL,
+    workspaceId uuid NOT NULL,
+    startDate DATE NOT NULL,
+    endDate DATE NOT NULL,
+    CONSTRAINT fk_member FOREIGN KEY (memberId) REFERENCES members(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT fk_workspace FOREIGN KEY (workspaceId) REFERENCES workspaces(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE services (
     id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
     name VARCHAR(50) NOT NULL,
     description VARCHAR(50) NOT NULL UNIQUE,
-    size double precision NOT NULL,
+    price double precision NOT NULL
 );
 
-CREATE TABLE default_services (
+CREATE TABLE defaultservices (
     PRIMARY KEY(id),
-    workspace_id uuid NOT NULL,
-    CONSTRAINT fk_workspace FOREIGN KEY (workspace_id) REFERENCES workspaces(id)
+    workspaceId uuid NOT NULL,
+    CONSTRAINT fk_workspace FOREIGN KEY (workspaceId) REFERENCES workspaces(id) ON DELETE CASCADE ON UPDATE CASCADE
 ) INHERITS (services);
 
-CREATE TABLE additional_services (
-    PRIMARY KEY(id),
-    reservation_id uuid NOT NULL,
-    CONSTRAINT fk_reservation FOREIGN KEY (reservation_id) REFERENCES reservations(id)
+CREATE TABLE additionalservices (
+    PRIMARY KEY(id)
 ) INHERITS (services);

@@ -1,18 +1,17 @@
-import DTO.UserDTO;
-import controller.implementations.WorkspaceController;
-import controller.implementations.auth.LoginController;
-import controller.implementations.auth.RegisterController;
+import controller.AdditionalServiceController;
+import controller.AuthentificationController;
+import controller.WorkspaceController;
+import model.Manager;
+import model.Member;
+import repository.implementations.AdditionalServiceRepository;
 import repository.implementations.MemberRepository;
 import repository.implementations.UserRepository;
 import repository.implementations.WorkspaceRepository;
-import repository.interfaces.UserRepositoryInterface;
-import repository.interfaces.WorkspaceRepositoryInterface;
+import service.implementations.AdditionalServiceService;
+import service.implementations.AuthentificationService;
 import service.implementations.WorkspaceService;
-import service.implementations.auth.LoginService;
-import service.implementations.auth.RegisterService;
 import service.interfaces.WorkspaceServiceInterface;
-
-import java.sql.SQLException;
+import utils.Session;
 
 public class Main {
     public static void main(String[] args) {
@@ -26,10 +25,23 @@ public class Main {
 //        LoginController loginController = new LoginController(loginService);
 //        loginController.showLogin();
 //
+
+
+//        AdditionalServiceRepository additionalServiceRepository = new AdditionalServiceRepository();
+//        AdditionalServiceService additionalServiceService = new AdditionalServiceService(additionalServiceRepository);
+//        AdditionalServiceController additionalServiceController = new AdditionalServiceController(additionalServiceService);
+//        additionalServiceController.create();
+
+        UserRepository<Manager> userRepository = new UserRepository<>();
+        AuthentificationService<Manager> authentificationService = new AuthentificationService<>(userRepository);
+        AuthentificationController<Manager> authentificationController = new AuthentificationController<>(authentificationService, Manager.class);
+        authentificationController.login();
+//        System.out.println(Session.getLoggedUser());
+
         WorkspaceRepository workspaceRepository = new WorkspaceRepository();
-        WorkspaceServiceInterface workspaceService = new WorkspaceService(workspaceRepository);
+        WorkspaceService workspaceService = new WorkspaceService(workspaceRepository);
         WorkspaceController workspaceController = new WorkspaceController(workspaceService);
-//        workspaceController.create();
-        workspaceController.getAll();
+        workspaceController.create();
+//        workspaceController.getAll();
     }
 }

@@ -1,14 +1,13 @@
-package controller.implementations.auth;
+package controller;
 
 import DTO.UserDTO;
 import UI.inputs.AuthInputs;
-import controller.interfaces.auth.LoginControllerInterface;
 import service.interfaces.auth.LoginServiceInterface;
 
 import java.sql.SQLException;
 import java.util.Optional;
 
-public class LoginController implements LoginControllerInterface {
+public class LoginController {
     private final LoginServiceInterface service;
     private static Optional<UserDTO> loggedUser = Optional.empty();
     AuthInputs inputs = new AuthInputs();
@@ -17,12 +16,10 @@ public class LoginController implements LoginControllerInterface {
         this.service = service;
     }
 
-    @Override
     public void showLogin() {
          this.login(inputs.login());
     }
 
-    @Override
     public void login(UserDTO userDTO) {
 
         try {
@@ -34,5 +31,9 @@ public class LoginController implements LoginControllerInterface {
 
     public static Optional<UserDTO> getLoggedUser() {
         return loggedUser;
+    }
+
+    public void resetPassword() {
+
     }
 }

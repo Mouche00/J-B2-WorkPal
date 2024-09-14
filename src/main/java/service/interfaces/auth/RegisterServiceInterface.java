@@ -7,5 +7,5 @@ import service.interfaces.ServiceInterface;
 import java.sql.SQLException;
 
 public interface RegisterServiceInterface  {
-    void save(UserDTO user) throws SQLException;
+    void save(UserDTO user) throws SQLException, IllegalAccessException;
 }

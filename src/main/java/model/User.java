@@ -2,18 +2,11 @@ package model;
 
 public class User {
 
-    protected int id;
     protected String name;
     protected String email;
     protected String password;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
+    protected String address;
+    protected String number;
 
     public String getName() {
         return name;
@@ -39,9 +32,46 @@ public class User {
         this.password = password;
     }
 
-    public User(String name, String email, String password) {
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
+    }
+
+    public User(String name, String email, String password, String address, String number) {
         this.name = name;
         this.email = email;
         this.password = password;
+        this.address = address;
+        this.number = number;
+    }
+
+    public User(String email, String password) {
+        this.email = email;
+        this.password = password;
+    }
+
+    public User() {
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", address='" + address + '\'' +
+                ", number='" + number + '\'' +
+                '}';
     }
 }

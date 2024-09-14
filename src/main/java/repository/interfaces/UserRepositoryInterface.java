@@ -1,13 +1,13 @@
 package repository.interfaces;
 
-import DTO.UserDTO;
+import model.LoggedInUser;
 import utils.enums.Role;
 
 import java.sql.SQLException;
 import java.util.Optional;
 
 public interface UserRepositoryInterface {
-    Optional<UserDTO> findByEmail(String email) throws SQLException;
+    Optional<LoggedInUser> findByEmail(String email) throws SQLException;
     Role getRole(String id) throws SQLException;
     boolean isMember(String id) throws SQLException;
     boolean isManager(String id) throws SQLException;

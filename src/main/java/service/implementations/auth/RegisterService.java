@@ -14,7 +14,7 @@ public class RegisterService implements RegisterServiceInterface {
     }
 
     @Override
-    public void save(UserDTO userDTO) throws SQLException {
+    public void save(UserDTO userDTO) throws SQLException, IllegalAccessException {
 
         repository.save(userDTO);
     }

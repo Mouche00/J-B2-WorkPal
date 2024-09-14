@@ -17,11 +17,11 @@ public class LoginService implements LoginServiceInterface {
 
     @Override
     public Optional<UserDTO> login(UserDTO userDTO) throws SQLException {
-        Optional<UserDTO> user = repository.findByEmail(userDTO.getEmail());
-        if(user.isPresent() && user.get().getPassword().equals(userDTO.getPassword())) {
-            user.get().setRole(repository.getRole(user.get().getId()));
-            return user;
-        }
+//        Optional<UserDTO> user = repository.findByEmail(userDTO.getEmail());
+//        if(user.isPresent() && user.get().getPassword().equals(userDTO.getPassword())) {
+//            user.get().setRole(repository.getRole(user.get().getId()));
+//            return user;
+//        }
 
         return Optional.empty();
     }

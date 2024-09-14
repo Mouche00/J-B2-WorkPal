@@ -1,49 +1,36 @@
 package repository.implementations;
 
-import DTO.UserDTO;
 import model.Member;
-import repository.interfaces.MemberRepositoryInterface;
-
-import java.sql.PreparedStatement;
+import repository.interfaces.RepositoryInterface;
+import utils.database.ORM;
 import java.sql.SQLException;
 import java.util.*;
 
-public class MemberRepository extends Repository implements MemberRepositoryInterface {
+public class MemberRepository extends Repository implements RepositoryInterface<Member> {
 
     @Override
-    public Optional<UserDTO> get(int id) {
+    public Optional<Member> get(int id) {
         return Optional.empty();
     }
 
     @Override
-    public HashMap<String, UserDTO> getAll() {
+    public HashMap<String, Member> getAll() {
         return null;
     }
 
     @Override
-    public boolean save(UserDTO userDTO) throws SQLException {
-//        String message = "ERROR: the member cannot be null";
-//        member = Objects.requireNonNull(member, message);
-        String sql = "INSERT INTO members (name, email, password, address, number) VALUES (?, ?, ?, ?, ?)";
-
-        PreparedStatement statement = connection.get().prepareStatement(sql);
-
-        statement.setString(1, userDTO.getName());
-        statement.setString(2, userDTO.getEmail());
-        statement.setString(3, userDTO.getPassword());
-        statement.setString(4, userDTO.getAddress());
-        statement.setString(5, userDTO.getNumber());
-
-        return statement.execute();
+    public void save(Member member) throws SQLException, IllegalAccessException {
+        ORM.save(member);
     }
 
     @Override
-    public boolean update(UserDTO userDTO) {
-        return true;
+    public boolean update(Member member) throws SQLException {
+        return false;
     }
 
     @Override
-    public boolean delete(UserDTO userDTO) {
-        return true;
+    public boolean delete(Member member) throws SQLException {
+        return false;
     }
+
 }

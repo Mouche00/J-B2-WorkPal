@@ -1,14 +1,13 @@
-package controller.implementations.auth;
+package controller;
 
 import DTO.UserDTO;
 import UI.inputs.AuthInputs;
-import controller.interfaces.auth.RegisterControllerInterface;
 import service.implementations.auth.RegisterService;
 
 import java.sql.SQLException;
 import java.util.Optional;
 
-public class RegisterController implements RegisterControllerInterface {
+public class RegisterController {
     private final RegisterService service;
     AuthInputs inputs = new AuthInputs();
 
@@ -16,17 +15,15 @@ public class RegisterController implements RegisterControllerInterface {
         this.service = service;
     }
 
-    @Override
     public void showRegister() {
          this.register(inputs.register());
     }
 
-    @Override
     public Optional<UserDTO> register(UserDTO userDTO) {
 
         try {
             service.save(userDTO);
-        } catch (SQLException e) {
+        } catch (SQLException | IllegalAccessException e) {
             System.out.println("ERROR: " + e.getMessage());
         }
         return Optional.empty();

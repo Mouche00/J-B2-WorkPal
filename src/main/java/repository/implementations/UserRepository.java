@@ -1,20 +1,24 @@
 package repository.implementations;
 
-import DTO.UserDTO;
+import model.LoggedInUser;
+import model.User;
+import repository.interfaces.RepositoryInterface;
 import repository.interfaces.UserRepositoryInterface;
+import utils.database.ORM;
 import utils.enums.Role;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.HashMap;
 import java.util.Optional;
 import java.util.UUID;
 
-public class UserRepository extends Repository implements UserRepositoryInterface {
+public class UserRepository<T extends User> extends Repository implements UserRepositoryInterface, RepositoryInterface<T> {
     @Override
-    public Optional<UserDTO> findByEmail(String email) throws SQLException {
-        Optional<UserDTO> user = Optional.empty();
+    public Optional<LoggedInUser> findByEmail(String email) throws SQLException {
+        Optional<LoggedInUser> user = Optional.empty();
         String sql = "SELECT * FROM users WHERE email = ?";
         PreparedStatement statement = connection.get().prepareStatement(sql);
         statement.setString(1, email);
@@ -27,7 +31,7 @@ public class UserRepository extends Repository implements UserRepositoryInterfac
             String address = resultSet.getString("address");
             String number = resultSet.getString("number");
 
-            user = Optional.of(new UserDTO(id, name, email, password, address, number));
+            user = Optional.of(new LoggedInUser(id, name, email, password, address, number));
         }
 
         return user;
@@ -81,5 +85,30 @@ public class UserRepository extends Repository implements UserRepositoryInterfac
         Statement statement = connection.get().createStatement();
         ResultSet resultSet = statement.executeQuery(sql);
         return resultSet.next();
+    }
+
+    @Override
+    public Optional<T> get(int id) throws SQLException {
+        return Optional.empty();
+    }
+
+    @Override
+    public HashMap<String, T> getAll() throws SQLException {
+        return null;
+    }
+
+    @Override
+    public void save(T t) throws SQLException, IllegalAccessException {
+        ORM.save(t);
+    }
+
+    @Override
+    public boolean update(T t) throws SQLException {
+        return false;
+    }
+
+    @Override
+    public boolean delete(T t) throws SQLException {
+        return false;
     }
 }

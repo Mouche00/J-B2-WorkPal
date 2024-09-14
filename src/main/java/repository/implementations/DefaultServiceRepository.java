@@ -20,7 +20,7 @@ public class DefaultServiceRepository extends Repository implements DefaultServi
     }
 
     @Override
-    public boolean save(DefaultService defaultService) throws SQLException {
+    public void save(DefaultService defaultService) throws SQLException {
         String sql = "INSERT INTO default_services (name, description, price, workspace_id) VALUES (?, ?, ?, ?::uuid)";
 
         PreparedStatement statement = connection.get().prepareStatement(sql);
@@ -32,7 +32,7 @@ public class DefaultServiceRepository extends Repository implements DefaultServi
 
 //        statement.setObject(5, Parser.parseUUID(workspace.getManagerId()), Types.OTHER);
 
-        return statement.execute();
+        statement.execute();
     }
 
     @Override

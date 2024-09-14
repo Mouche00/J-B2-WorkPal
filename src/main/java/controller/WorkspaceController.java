@@ -1,16 +1,16 @@
-package controller.implementations;
+package controller;
 
-import UI.inputs.AuthInputs;
 import UI.inputs.WorkspaceInputs;
-import controller.implementations.auth.LoginController;
-import model.DefaultService;
 import model.Workspace;
-import repository.implementations.DefaultServiceRepository;
-import service.implementations.DefaultServiceService;
 import service.interfaces.WorkspaceServiceInterface;
+import utils.Parser;
+import utils.Session;
+import utils.Validator;
+import utils.enums.InputType;
 
 import java.sql.SQLException;
 import java.util.Map;
+import java.util.UUID;
 
 public class WorkspaceController {
 
@@ -24,12 +24,17 @@ public class WorkspaceController {
     public void create() {
 
         try {
-            Workspace workspace = inputs.create();
-            workspace.setManager(LoginController.getLoggedUser().get().getId());
-            System.out.println(workspace);
-            service.save(workspace);
+            String name = Validator.validateInput("Enter the workspace' name: ", InputType.STRING);
+            String description = Validator.validateInput("Enter the workspace' description: ", InputType.STRING);
+            double size = Parser.parseDouble(
+                    Validator.validateInput("Enter the workspace' size: ", InputType.DOUBLE)).get();
+            double price = Parser.parseDouble(
+                    Validator.validateInput("Enter the workspace' price: ", InputType.DOUBLE)).get();
+            String managerId = Session.getLoggedUser().get().getId();
 
-        } catch (SQLException e) {
+            service.save(new Workspace(name, description, size, price, managerId));
+
+        } catch (SQLException | IllegalAccessException e) {
             System.out.println("ERROR: " + e.getMessage());
         }
     }

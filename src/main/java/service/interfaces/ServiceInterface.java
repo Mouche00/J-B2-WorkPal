@@ -5,7 +5,7 @@ import java.util.HashMap;
 
 public interface ServiceInterface<T> {
 
-    void save(T t) throws SQLException;
+    void save(T t) throws SQLException, IllegalAccessException;
 
     HashMap<String, T> getAll() throws SQLException;
 }

@@ -1,48 +1,39 @@
 package repository.implementations;
 
 import DTO.UserDTO;
-import repository.interfaces.ManagerRepositoryInterface;
+import model.Manager;
+import repository.interfaces.RepositoryInterface;
+import utils.database.ORM;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Optional;
 
-public class ManagerRepository extends Repository implements ManagerRepositoryInterface {
+public class ManagerRepository extends Repository implements RepositoryInterface<Manager> {
+
     @Override
-    public Optional<UserDTO> get(int id) throws SQLException {
+    public Optional<Manager> get(int id) throws SQLException {
         return Optional.empty();
     }
 
     @Override
-    public HashMap<String, UserDTO> getAll() throws SQLException {
+    public HashMap<String, Manager> getAll() throws SQLException {
         return null;
     }
 
     @Override
-    public boolean save(UserDTO userDTO) throws SQLException {
-        String sql = "INSERT INTO managers (name, email, password, address, number) VALUES (?, ?, ?, ?, ?)";
-
-        PreparedStatement statement = connection.get().prepareStatement(sql);
-
-        statement.setString(1, userDTO.getName());
-        statement.setString(2, userDTO.getEmail());
-        statement.setString(3, userDTO.getPassword());
-        statement.setString(4, userDTO.getAddress());
-        statement.setString(5, userDTO.getNumber());
-
-        return statement.execute();
+    public void save(Manager manager) throws SQLException, IllegalAccessException {
+        ORM.save(manager);
     }
 
     @Override
-    public boolean update(UserDTO userDTO) throws SQLException {
+    public boolean update(Manager manager) throws SQLException {
         return false;
     }
 
     @Override
-    public boolean delete(UserDTO userDTO) throws SQLException {
+    public boolean delete(Manager manager) throws SQLException {
         return false;
     }
 }

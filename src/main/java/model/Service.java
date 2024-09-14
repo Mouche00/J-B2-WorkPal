@@ -2,18 +2,9 @@ package model;
 
 abstract public class Service {
 
-    private String id;
-    private String name;
-    private String description;
-    private double price;
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
+    protected String name;
+    protected String description;
+    protected double price;
 
     public String getName() {
         return name;

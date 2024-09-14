@@ -9,8 +9,7 @@ public class Workspace {
     private String description;
     private double size;
     private double price;
-    private String manager;
-    private List<DefaultService> services;
+    private String managerId;
 
     public String getId() {
         return id;
@@ -52,38 +51,29 @@ public class Workspace {
         this.price = price;
     }
 
-    public String getManager() {
-        return manager;
+    public String getManagerId() {
+        return managerId;
     }
 
-    public void setManager(String manager) {
-        this.manager = manager;
+    public void setManagerId(String managerId) {
+        this.managerId = managerId;
     }
 
-    public List<DefaultService> getServices() {
-        return services;
-    }
-
-    public void setServices(List<DefaultService> services) {
-        this.services = services;
-    }
-
-    public Workspace(String id, String name, String description, double size, double price, String manager, List<DefaultService> services) {
+    public Workspace(String id, String name, String description, double size, double price, String managerId) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.size = size;
         this.price = price;
-        this.manager = manager;
-        this.services = services;
+        this.managerId = managerId;
     }
 
-    public Workspace(String name, String description, double size, double price, String manager) {
+    public Workspace(String name, String description, double size, double price, String managerId) {
         this.name = name;
         this.description = description;
         this.size = size;
         this.price = price;
-        this.manager = manager;
+        this.managerId = managerId;
     }
 
     public Workspace(String name, String description, double size, double price) {
@@ -104,7 +94,7 @@ public class Workspace {
                 ", Description='" + description + '\'' +
                 ", size=" + size +
                 ", price=" + price +
-                ", manager='" + manager + '\'' +
+                ", managerId='" + managerId + '\'' +
                 '}';
     }
 }

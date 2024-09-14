@@ -14,7 +14,7 @@ public class WorkspaceService implements WorkspaceServiceInterface {
         this.repository = repository;
     }
 
-    public void save(Workspace workspace) throws SQLException {
+    public void save(Workspace workspace) throws SQLException, IllegalAccessException {
         repository.save(workspace);
     }
 
